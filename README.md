@@ -1,12 +1,14 @@
-# すれちがい寮ログ（ローカル開発版）
+# すれちがい寮ログ（Vercelローカル開発版）
 
-チカチカ（ループ遷移）を避けるため、GitHub Pages向けの強制リダイレクト実装を外し、
-**ローカルで安定して動かす構成**に戻しました。
+このリポジトリは **Vercelで動かせる Next.js 構成** にしています。  
+重い未実装機能は一旦外し、まず確実に動くUIデモとして運用します。
 
-## いまの方針
-- Next.js を通常モードで実行（`next dev` / `next build`）
-- 画面デモを優先（重い未実装機能は無理に入れない）
-- UI確認と開発体験を優先
+## 現在の実装範囲
+- 画面遷移とUIコンポーネント
+- すれちがい一覧UI
+- パズル進捗UI
+- 住民コレクションUI
+- プロフィール入力UI
 
 ## ローカル起動
 ```bash
@@ -14,20 +16,24 @@ npm install
 npm run dev
 ```
 
-## ビルド確認
+## Vercelデプロイ手順
+1. GitHubにpush
+2. VercelでリポジトリをImport
+3. Framework Preset は `Next.js`
+4. Build Command は `npm run build`
+5. Deploy
+
+> このリポジトリには `vercel.json` を置いてあり、上記コマンド設定済みです。
+
+## 動作確認コマンド
 ```bash
 npm run build
 npm run lint
 npm run typecheck
 ```
 
-## 実装済み
-- ホーム / すれちがい / パズル / 住民 / プロフィール設定などのUI
-- 共通コンポーネント（BottomNav, Header, Card群）
-- 位置情報/遭遇ロジックのユーティリティ（デモ向け）
-
 ## いったん外したもの
-- GitHub Pages向け強制リダイレクト（チカチカ対策）
+- GitHub Pages向け強制リダイレクト
 - サーバー必須の本番機能（OAuth本接続など）
 
 ## ライセンス
