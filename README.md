@@ -56,3 +56,9 @@ npm run typecheck
 
 ## ライセンス
 MIT (`LICENSE`)
+
+## トラブルシューティング
+### Vercelで `404: NOT_FOUND` が出る
+- `next-pwa` のような追加プラグインでビルドが不安定な場合、まず標準 `next.config.ts` でデプロイ確認してください。
+- Vercel の Project Settings で Framework Preset が `Next.js` になっているか確認してください。
+- ルートが保護されている場合は `/login` へ直接アクセスして動作確認してください。
