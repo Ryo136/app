@@ -89,3 +89,9 @@ npx serve out
 - `Settings > Pages` の Source を `GitHub Actions` に設定してください。
 - それでもREADMEが出る場合、`index.html` が優先されるようこのリポジトリにはルート `index.html` を配置しています。
 - `https://<user>.github.io/<repo>/home/` へ直接アクセスするとデモ画面を確認できます。
+
+### GitHub Pagesで「ページが見つかりません」が出る場合
+
+- URLは必ず末尾スラッシュ付きで開いてください: `https://<user>.github.io/<repo>/`
+- `Actions > Deploy GitHub Pages` が成功しているか確認してください。
+- 404が続く場合は `https://<user>.github.io/<repo>/home/` を直接開いてください。

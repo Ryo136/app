@@ -2,7 +2,10 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - work
+      - 'codex/**'
   workflow_dispatch:
 
 permissions:
@@ -25,6 +28,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build:gh-pages
+      - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
