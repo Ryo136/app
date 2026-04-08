@@ -5,7 +5,7 @@
 ## 使用技術
 - Next.js (App Router) / TypeScript
 - Tailwind CSS
-- Supabase (Auth + Postgres)
+- Supabase (Auth + Postgres / @supabase/ssr)
 - Google OAuth
 - Framer Motion
 - react-hook-form + zod
@@ -62,3 +62,8 @@ MIT (`LICENSE`)
 - `next-pwa` のような追加プラグインでビルドが不安定な場合、まず標準 `next.config.ts` でデプロイ確認してください。
 - Vercel の Project Settings で Framework Preset が `Next.js` になっているか確認してください。
 - ルートが保護されている場合は `/login` へ直接アクセスして動作確認してください。
+
+
+## セキュリティアップデート
+- Next.js は CVE-2025-66478 対応済みの `15.5.7` を使用しています。
+- Supabase Auth Helpers は非推奨のため、`@supabase/ssr` に移行済みです。

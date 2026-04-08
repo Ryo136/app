@@ -1,16 +1,43 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
 
 const protectedRoutes = ['/home', '/encounters', '/puzzle', '/apartment', '/events', '/settings'];
 
-export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  if (!protectedRoutes.some((route) => pathname.startsWith(route))) return NextResponse.next();
+export async function middleware(request: NextRequest) {
+  if (!protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))) {
+    return NextResponse.next();
+  }
 
-  const hasSession = request.cookies.get('sb-access-token');
-  if (!hasSession) {
+  let response = NextResponse.next({ request });
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+          response = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }: { name: string; value: string; options: CookieOptions }) =>
+            response.cookies.set(name, value, options)
+          );
+        }
+      }
+    }
+  );
+
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+
+  if (!user) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
-  return NextResponse.next();
+
+  return response;
 }
 
 export const config = {
