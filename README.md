@@ -1,26 +1,12 @@
-# すれちがい寮ログ（GitHub Pages デモ版）
+# すれちがい寮ログ（ローカル開発版）
 
-このリポジトリは **表示できる機能に絞った軽量デモ** です。  
-「実装できなさそうな機能は無くしていい」という方針に合わせ、サーバー依存の機能は外しています。
+チカチカ（ループ遷移）を避けるため、GitHub Pages向けの強制リダイレクト実装を外し、
+**ローカルで安定して動かす構成**に戻しました。
 
-## 現在の実装範囲
-- 画面遷移とUIコンポーネント
-- すれちがい一覧UI
-- パズル進捗UI
-- 住民コレクションUI
-- プロフィール入力UI
-
-## いったん外した機能
-- 本番認証（Google OAuth）
-- Supabase API連携
-- middlewareベースの認可
-- 実データ更新処理
-
-## 技術スタック
-- Next.js App Router (static export)
-- TypeScript
-- Tailwind CSS
-- Framer Motion（軽微な演出）
+## いまの方針
+- Next.js を通常モードで実行（`next dev` / `next build`）
+- 画面デモを優先（重い未実装機能は無理に入れない）
+- UI確認と開発体験を優先
 
 ## ローカル起動
 ```bash
@@ -28,16 +14,21 @@ npm install
 npm run dev
 ```
 
-## GitHub Pages デプロイ
+## ビルド確認
 ```bash
-npm run build:gh-pages
+npm run build
+npm run lint
+npm run typecheck
 ```
 
-GitHub Actions の `Deploy GitHub Pages` が `out/` を配信します。
+## 実装済み
+- ホーム / すれちがい / パズル / 住民 / プロフィール設定などのUI
+- 共通コンポーネント（BottomNav, Header, Card群）
+- 位置情報/遭遇ロジックのユーティリティ（デモ向け）
 
-## URLの注意
-- `https://<user>.github.io/<repo>/`
-- 404 の場合は `https://<user>.github.io/<repo>/home/`
+## いったん外したもの
+- GitHub Pages向け強制リダイレクト（チカチカ対策）
+- サーバー必須の本番機能（OAuth本接続など）
 
 ## ライセンス
 MIT
