@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Search, Puzzle, Building2, Calendar } from 'lucide-react';
+import { Home, Search, Puzzle, Building2 } from 'lucide-react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
@@ -9,8 +9,7 @@ const items: Array<{ href: Route; label: string; icon: React.ComponentType<{ cla
   { href: '/home', label: 'ホーム', icon: Home },
   { href: '/encounters', label: 'すれちがい', icon: Search },
   { href: '/puzzle', label: 'パズル', icon: Puzzle },
-  { href: '/apartment', label: '住民', icon: Building2 },
-  { href: '/events', label: 'イベント', icon: Calendar }
+  { href: '/apartment', label: '住民', icon: Building2 }
 ];
 
 export function BottomNav() {

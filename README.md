@@ -1,97 +1,43 @@
-# すれちがい寮ログ
+# すれちがい寮ログ（GitHub Pages デモ版）
 
-学生向けの学校内すれちがい交流アプリ。日中に取得した接近ログを夜21:30以降に公開し、段階的なプロフィール解放・リアクション・パズル収集・住民コレクションで交流を促進します。
+このリポジトリは **表示できる機能に絞った軽量デモ** です。  
+「実装できなさそうな機能は無くしていい」という方針に合わせ、サーバー依存の機能は外しています。
 
-## 使用技術
-- Next.js (App Router) / TypeScript
+## 現在の実装範囲
+- 画面遷移とUIコンポーネント
+- すれちがい一覧UI
+- パズル進捗UI
+- 住民コレクションUI
+- プロフィール入力UI
+
+## いったん外した機能
+- 本番認証（Google OAuth）
+- Supabase API連携
+- middlewareベースの認可
+- 実データ更新処理
+
+## 技術スタック
+- Next.js App Router (static export)
+- TypeScript
 - Tailwind CSS
-- Supabase (Auth + Postgres / @supabase/ssr)
-- Google OAuth
-- Framer Motion
-- react-hook-form + zod
-- GitHub Actions (lint)
+- Framer Motion（軽微な演出）
 
-## セットアップ
+## ローカル起動
 ```bash
 npm install
-cp .env.example .env.local
 npm run dev
 ```
 
-## 環境変数
-- `NEXT_PUBLIC_SUPABASE_URL`: Supabase Project URL
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Supabase anon key
-- `NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN`: 許可する学校ドメイン（例: `example.ac.jp`）
-
-## Supabase セットアップ
-1. Supabase プロジェクト作成
-2. Authentication > Providers で Google を有効化
-3. SQL Editor で `supabase/schema.sql` を実行
-4. 続いて `supabase/rls.sql` を実行
-5. `Auth > URL Configuration` にローカル/Vercelの callback URL を追加
-
-## Googleログイン設定
-- Google Cloud ConsoleでOAuthクライアントを発行
-- Authorized redirect URI に `https://<your-domain>/api/auth/callback` を設定
-- Supabase Auth ProviderにClient ID/Secretを設定
-- 学校ドメイン判定は `NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN` で制御
-
-## ローカル開発
-```bash
-npm run dev
-npm run lint
-npm run typecheck
-```
-
-## デプロイ (Vercel)
-1. GitHub連携で本リポジトリをImport
-2. Environment Variablesに `.env.example` の値を設定
-3. Build Command: `npm run build`
-4. OutputはNext.js標準
-
-## 無料枠運用メモ
-- Supabase Free + Vercel Hobbyを前提
-- 位置情報ポーリングはクライアント側で実行間隔を抑制
-- 重い分析は夜間バッチへ将来分離
-
-## ライセンス
-MIT (`LICENSE`)
-
-## トラブルシューティング
-### Vercelで `404: NOT_FOUND` が出る
-- `next-pwa` のような追加プラグインでビルドが不安定な場合、まず標準 `next.config.ts` でデプロイ確認してください。
-- Vercel の Project Settings で Framework Preset が `Next.js` になっているか確認してください。
-- ルートが保護されている場合は `/login` へ直接アクセスして動作確認してください。
-
-
-## セキュリティアップデート
-- Next.js は CVE-2025-66478 対応済みの `15.5.7` を使用しています。
-- Supabase Auth Helpers は非推奨のため、`@supabase/ssr` に移行済みです。
-
-## GitHub Pages 配布
-このリポジトリは静的書き出し (`output: export`) で GitHub Pages 表示に対応しています。
-
-### 手順
-1. GitHub の `Settings > Pages` で `GitHub Actions` を選択
-2. `main` ブランチへ push
-3. `Deploy GitHub Pages` ワークフローで `out/` が配信されます
-
-### ローカル確認
+## GitHub Pages デプロイ
 ```bash
 npm run build:gh-pages
-npx serve out
 ```
 
-> 注意: GitHub Pages版は静的デモ用途です。Supabase OAuth / API Route / middleware 認証はVercelデプロイ向け実装となります。
+GitHub Actions の `Deploy GitHub Pages` が `out/` を配信します。
 
+## URLの注意
+- `https://<user>.github.io/<repo>/`
+- 404 の場合は `https://<user>.github.io/<repo>/home/`
 
-### GitHub PagesでREADMEだけが表示される場合
-- `Settings > Pages` の Source を `GitHub Actions` に設定してください。
-- それでもREADMEが出る場合、`index.html` が優先されるようこのリポジトリにはルート `index.html` を配置しています。
-- `https://<user>.github.io/<repo>/home/` へ直接アクセスするとデモ画面を確認できます。
-
-### GitHub Pagesで「ページが見つかりません」が出る場合
-
-- URLは必ず末尾スラッシュ付きで開いてください: `https://<user>.github.io/<repo>/`
-- `Actions > Deploy GitHub Pages` が成功しているか確認してください。
-- 404が続く場合は `https://<user>.github.io/<repo>/home/` を直接開いてください。
+## ライセンス
+MIT
