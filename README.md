@@ -83,3 +83,9 @@ npx serve out
 ```
 
 > 注意: GitHub Pages版は静的デモ用途です。Supabase OAuth / API Route / middleware 認証はVercelデプロイ向け実装となります。
+
+
+### GitHub PagesでREADMEだけが表示される場合
+- `Settings > Pages` の Source を `GitHub Actions` に設定してください。
+- それでもREADMEが出る場合、`index.html` が優先されるようこのリポジトリにはルート `index.html` を配置しています。
+- `https://<user>.github.io/<repo>/home/` へ直接アクセスするとデモ画面を確認できます。
