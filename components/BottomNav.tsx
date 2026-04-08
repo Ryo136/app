@@ -2,9 +2,10 @@
 
 import { Home, Search, Puzzle, Building2, Calendar } from 'lucide-react';
 import Link from 'next/link';
+import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
 
-const items = [
+const items: Array<{ href: Route; label: string; icon: React.ComponentType<{ className?: string }> }> = [
   { href: '/home', label: 'ホーム', icon: Home },
   { href: '/encounters', label: 'すれちがい', icon: Search },
   { href: '/puzzle', label: 'パズル', icon: Puzzle },
@@ -19,7 +20,10 @@ export function BottomNav() {
       <ul className="flex justify-around">
         {items.map(({ href, label, icon: Icon }) => (
           <li key={href}>
-            <Link href={href} className={`flex flex-col items-center text-xs ${pathname === href ? 'text-brand-600' : 'text-slate-500'}`}>
+            <Link
+              href={href}
+              className={`flex flex-col items-center text-xs ${pathname === href ? 'text-brand-600' : 'text-slate-500'}`}
+            >
               <Icon className="h-5 w-5" />
               {label}
             </Link>
