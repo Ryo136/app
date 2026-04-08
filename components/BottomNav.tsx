@@ -4,8 +4,9 @@ import { Home, Search, Puzzle, Building2 } from 'lucide-react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
+import type { ComponentType } from 'react';
 
-const items: Array<{ href: Route; label: string; icon: React.ComponentType<{ className?: string }> }> = [
+const items: Array<{ href: Route; label: string; icon: ComponentType<{ className?: string }> }> = [
   { href: '/home', label: 'ホーム', icon: Home },
   { href: '/encounters', label: 'すれちがい', icon: Search },
   { href: '/puzzle', label: 'パズル', icon: Puzzle },
