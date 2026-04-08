@@ -1,25 +1,15 @@
 'use client';
 
-import { createClient } from '@/lib/supabase';
+import Link from 'next/link';
 
 export default function LoginPage() {
-  const signIn = async () => {
-    const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/api/auth/callback`
-      }
-    });
-  };
-
   return (
     <div className="space-y-5 p-4">
       <h1 className="text-2xl font-bold text-brand-700">すれちがい寮ログ</h1>
-      <p className="card text-sm">学校のGoogleアカウントでログインしてください。</p>
-      <button className="btn-primary w-full" onClick={signIn}>
-        Googleでログイン
-      </button>
+      <p className="card text-sm">GitHub Pages版では認証機能は無効です。デモ画面を表示します。</p>
+      <Link href="/home" className="btn-primary block text-center">
+        デモモードで入る
+      </Link>
     </div>
   );
 }

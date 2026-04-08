@@ -67,3 +67,19 @@ MIT (`LICENSE`)
 ## セキュリティアップデート
 - Next.js は CVE-2025-66478 対応済みの `15.5.7` を使用しています。
 - Supabase Auth Helpers は非推奨のため、`@supabase/ssr` に移行済みです。
+
+## GitHub Pages 配布
+このリポジトリは静的書き出し (`output: export`) で GitHub Pages 表示に対応しています。
+
+### 手順
+1. GitHub の `Settings > Pages` で `GitHub Actions` を選択
+2. `main` ブランチへ push
+3. `Deploy GitHub Pages` ワークフローで `out/` が配信されます
+
+### ローカル確認
+```bash
+npm run build:gh-pages
+npx serve out
+```
+
+> 注意: GitHub Pages版は静的デモ用途です。Supabase OAuth / API Route / middleware 認証はVercelデプロイ向け実装となります。

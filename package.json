@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:gh-pages": "NEXT_PUBLIC_BASE_PATH=/app next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
